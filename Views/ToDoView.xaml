@@ -4,10 +4,7 @@
              x:Class="MVVM_API_SampleProject.Views.ToDoView"
              Title="ToDoView">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        
         <Label 
             Text="{Binding ToDo.UserId}"
             VerticalOptions="Center" 

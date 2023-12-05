@@ -1,67 +1,41 @@
-﻿using Android.OS;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MVVM_API_SampleProject.Models;
-using System;
-using System.Collections.Generic;
+using MVVM_API_SampleProject.Services;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Input;
-
-namespace MVVM_API_SampleProject.ViewModels
+namespace MVVM_API_SampleProject.ViewModels;
+internal partial class PostViewModel : ObservableObject, IDisposable
 {
-    internal partial class PostViewModel : ObservableObject, IDisposable 
+    private readonly PostService _postService;
+
+    [ObservableProperty]
+    public int _UserOd;
+    [ObservableProperty]
+    public int _Id;
+    [ObservableProperty]
+    public string _Title;
+    [ObservableProperty]
+    public string _Body;
+    [ObservableProperty]
+    public ObservableCollection<Post> _posts;
+
+    public PostViewModel()
     {
-        HttpClient client;
-
-        JsonSerializerOptions _serializerOptions;
-        string baseUrl = "http://jsonplaceholder.typicode.com";
-
-        [ObservableProperty]
-        public int _UserId;
-        [ObservableProperty]
-        public int _Id;
-        [ObservableProperty]
-        public string _Title;
-        [ObservableProperty]
-        public string _Body;
-        [ObservableProperty]
-        public ObservableCollection<Post> _posts;
-
-        public PostViewModel()
-        {
-            client =  new HttpClient();
-            Posts = new ObservableCollection<Post>();
-            _serializerOptions = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-        }
-
-        public ICommand GetPostsCommand => new Command(async () => await LoadPostsAsync());
-
-        private async Task LoadPostsAsync()
-        {
-            var url = $"{baseUrl}/posts";
-
-            try
-            {
-                var response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Posts = JsonSerializer.Deserialize<ObservableCollection<Post>>(content, _serializerOptions);
-                }
-            }
-            catch (Exception e)
-            {
-                
-            }
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        Posts = new ObservableCollection<Post>();
+        _postService = new PostService();
     }
 
+    public ICommand GetPostsCommand => new Command(async () => await LoadPostsAsync());
+
+    private async Task LoadPostsAsync()
+    {
+        Posts = await _postService.GetPostsAsync();
+    }
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
 }

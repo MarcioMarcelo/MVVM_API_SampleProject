@@ -6,12 +6,12 @@
     <ScrollView>
         <VerticalStackLayout>
             <Entry Placeholder="Id Post" Text="{Binding Post.Id}"/>
-            <Entry Placeholder="Título do Post" Text="{Binding Post.UserID}"/>
-            <Entry Placeholder="Título do Post" Text="{Binding Pos.Title}"/>
+            <Entry Placeholder="Titulo do Post" Text="{Binding Post.UserId}"/>
+            <Entry Placeholder="Titulo do Post" Text="{Binding Post.Title}"/>
             <Entry Placeholder="Id Post" Text="{Binding Post.Body}"/>
 
             <HorizontalStackLayout>
-                <Button Text="Carregar Posts" Command="{Binding Posts}"/>
+                <Button Text="Carregar Posts" Command="{Binding GetPostsCommand}"/>
             </HorizontalStackLayout>
 
             <CollectionView x:Name="PostsCollection" ItemsSource="{Binding Posts}" EmptyView="Nenhum post encontrado">
@@ -24,25 +24,25 @@
                         <VerticalStackLayout>
                             <Frame>
                                 <VerticalStackLayout Margin="50" HorizontalOptions="Center" MaximumWidthRequest="180">
-                                    <Label 
-                                        Text="{Binding Post.UserId}"
-                                        VerticalOptions="Center" 
-                                        HorizontalOptions="Center" />
+                                    <Label
+                                        Text="{Binding UserId}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
 
-                                    <Label 
-                                        Text="{Binding  Post.Id}"
-                                        VerticalOptions="Center" 
-                                        HorizontalOptions="Center" />
+                                    <Label
+                                        Text="{Binding Id}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
 
-                                    <Label 
-                                        Text="{Binding  Post.Title}"
-                                        VerticalOptions="Center" 
-                                        HorizontalOptions="Center" />
+                                    <Label
+                                        Text="{Binding Title}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
 
-                                    <Label 
-                                        Text="{Binding  Post.Body}"
-                                        VerticalOptions="Center" 
-                                        HorizontalOptions="Center" />
+                                    <Label
+                                        Text="{Binding Body}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
                                 </VerticalStackLayout>
                             </Frame>
                         </VerticalStackLayout>
