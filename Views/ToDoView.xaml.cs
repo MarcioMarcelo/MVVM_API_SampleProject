@@ -9,8 +9,4 @@ public partial class ToDoView : ContentPage
         BindingContext = new ToDoViewModel();
 
     }
-    void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-        
-    }
 }
